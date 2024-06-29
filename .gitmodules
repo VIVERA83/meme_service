@@ -1,0 +1,6 @@
+[submodule "meme_storage"]
+	path = meme_storage
+	url = git@github.com:VIVERA83/meme_storage.git
+[submodule "mem_api"]
+	path = mem_api
+	url = git@github.com:VIVERA83/mem_api.git
