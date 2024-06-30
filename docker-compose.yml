@@ -27,8 +27,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    ports:
-      - ${POSTGRES_PORT}:${POSTGRES_PORT}
     command: -p ${POSTGRES_PORT}
 
   mem_api:
