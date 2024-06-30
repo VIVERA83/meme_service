@@ -4,9 +4,6 @@ services:
     container_name: minio_mem
     image: minio/minio:latest
     command: server --console-address ":${MINIO_PORT_2}" /data/
-    ports:
-      - ${MINIO_PORT_1}:${MINIO_PORT_1}
-      - ${MINIO_PORT_2}:${MINIO_PORT_2}
     env_file:
       - .env
     volumes:
@@ -31,7 +28,7 @@ services:
       timeout: 5s
       retries: 5
     ports:
-          - ${POSTGRES_PORT}:${POSTGRES_PORT}
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
     command: -p ${POSTGRES_PORT}
 
   mem_api:
@@ -41,14 +38,10 @@ services:
       context: mem_api
       dockerfile: Dockerfile
     env_file:
-      -  mem_api/.env_mem_api
-    ports:
-      - 8006:8006
+      - mem_api/.env_mem_api
     depends_on:
       - postgres
       - minio
-#    volumes:
-#      - ./mem_api/mem_api:/mem_api
 
   meme_storage:
     restart: always
@@ -58,22 +51,29 @@ services:
       dockerfile: Dockerfile
     env_file:
       - meme_storage/.env_image_store
-    ports:
-          - 8005:8005
     depends_on:
       - minio
-#    volumes:
-#      - ./meme_storage/meme_storage:/meme_storage
 
   migration_meme_center:
     build:
       context: mem_api
       dockerfile: Dockerfile
     env_file:
-      -  mem_api/.env_mem_api
+      - mem_api/.env_mem_api
     depends_on:
       - postgres
     command: alembic upgrade head
+
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    env_file:
+      - .env
+    ports:
+      - ${EXTERNAL_PORT}:${INTERNAL_PORT}
+    depends_on:
+      - mem_api
+      - meme_storage
 
 volumes:
   minio-storage:
