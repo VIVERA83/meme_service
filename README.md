@@ -7,10 +7,12 @@ ___
 
 Meme Service - сервис для работы с МЕМАМИ обеспечивает удобное хранение и выемку по необходимости.
 А вообще это небольшое тестовое задание в котором необходимо было реализовать приложение на основе микро сервисной
-архитектуры. Задача была создать интерфейс для взаимодействия с внешними запросами. В данной роли [mem_api](https://github.com/VIVERA83/mem_api/tree/master).
+архитектуры. Задача была создать интерфейс для взаимодействия с внешними запросами. В данной
+роли [mem_api](https://github.com/VIVERA83/mem_api/tree/master).
 Принимает картинку и подпись к ней, подпись закидывает в БД Postgres, а картинку в хранилище S3, в нашем случае
 [Minio](https://min.io/docs/minio/linux/index.html). Для работы с хранящем было указано сделать отдельный
-сервис. В роли такого сервиса [meme_storage](https://github.com/VIVERA83/meme_storage/tree/master). В целом возможные действия с данными выглядят так:
+сервис. В роли такого сервиса [meme_storage](https://github.com/VIVERA83/meme_storage/tree/master). В целом возможные
+действия с данными выглядят так:
 
 1. Добавление нового (картинка + подпись)
 2. Посмотреть все записи с использованием пагинации
@@ -33,9 +35,11 @@ Meme Service - сервис для работы с МЕМАМИ обеспечи
 
 1. __.env__ - Для [docker-compose.yml](docker-compose.yml) в корневом каталоге. За основу можно
    взять [.env_example](.env_example)
-2. __.env__ - Для [mem_api](mem_api) в одноименном каталоге за основу можно взять [.env_example](mem_api%2F.env_example)
-3. __.env__ - Для [meme_storage](meme_storage) в одноименном каталоге за основу можно
-   взять [.env_example](meme_storage%2F.env_example)
+2. __.env__ - Для [mem_api](https://github.com/VIVERA83/mem_api/tree/master) в одноименном каталоге за основу можно
+   взять [.env_example](https://github.com/VIVERA83/mem_api/blob/master/.env_example)
+3. __.env__ - Для [meme_storage](https://github.com/VIVERA83/meme_storage/tree/master) в одноименном каталоге за основу
+   можно
+   взять [.env_example](https://github.com/VIVERA83/meme_storage/blob/master/.env_example)
 
 __Далее выполняем команду:__
 
@@ -55,14 +59,17 @@ docker compose up --build
 docker compose up --build
 ```
 
-3. Переходим в корень папки [tests](mem_api%2Ftests) и выполняем миграцию (создаем тестовую БД)
+3. Переходим в корень
+   папки [tests](https://github.com/VIVERA83/mem_api/tree/677b8d4963fb5debc05386c1054f42537fde043c/tests) и выполняем
+   миграцию (создаем тестовую БД)
+   Тоже нужно создать __.env__ файл пример там же.
 
 ```bash
 alembic upgrade head
 ```
 
 4. Запускаем тесты (предварительно необходимо установить необходимые зависимости которые находятся
-   в [requirements.txt](mem_api%2Frequirements.txt))
+   в [requirements.txt](https://github.com/VIVERA83/mem_api/blob/677b8d4963fb5debc05386c1054f42537fde043c/requirements.txt))
 
 ```bash
 pytest
